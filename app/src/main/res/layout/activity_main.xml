@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.flaringapp.graphdrawer.linegraph.LineGraphView
+    <com.flaringapp.graphdrawer.graph.line.LineGraphView
         android:id="@+id/viewLineGraph"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
