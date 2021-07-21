@@ -28,8 +28,32 @@ class LineGraphRenderer : ComplexRenderer<GraphRenderer>() {
         padding = paddings
     )
 
+    val xAxisGuidelinesRenderer = LineGraphXAxisGuidelinesRenderer(
+        Paint().apply {
+            style = Paint.Style.STROKE
+            strokeWidth = 4f
+            color = Color.RED
+            alpha = 128
+        },
+        guidelineGap = 160f,
+        padding = paddings,
+    )
+
+    val yAxisGuidelinesRenderer = LineGraphYAxisGuidelinesRenderer(
+        Paint().apply {
+            style = Paint.Style.STROKE
+            strokeWidth = 4f
+            color = Color.BLUE
+            alpha = 128
+        },
+        guidelineGap = 100f,
+        padding = paddings,
+    )
+
     init {
         renderers += axesRenderer
+        renderers += xAxisGuidelinesRenderer
+        renderers += yAxisGuidelinesRenderer
     }
 
 }
