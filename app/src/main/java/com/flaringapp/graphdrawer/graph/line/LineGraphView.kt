@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
+import com.flaringapp.graphdrawer.graph.line.renderers.LineGraphRenderer
 import com.flaringapp.graphdrawer.graph.renderer.ComplexRenderer
 import com.flaringapp.graphdrawer.graph.renderer.GraphRenderer
 import com.flaringapp.graphdrawer.graph.renderer.RendererContainer
@@ -21,6 +22,8 @@ class LineGraphView @JvmOverloads constructor(
 
     init {
         setWillNotDraw(false)
+
+        renderers += LineGraphRenderer()
 
         notifyRenderersPropertiesChanged()
     }
