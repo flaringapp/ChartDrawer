@@ -19,8 +19,8 @@ abstract class ViewportRenderer: PropertyHoldingRenderer() {
         mViewport.updateAndCalculateSize {
             left = properties.translateX
             top = properties.translateY
-            right = mViewport.left + (properties.width * properties.scale)
-            bottom = mViewport.top + (properties.height * properties.scale)
+            right = mViewport.left + (properties.width * properties.scaleX)
+            bottom = mViewport.top + (properties.height * properties.scaleY)
         }
     }
 }
