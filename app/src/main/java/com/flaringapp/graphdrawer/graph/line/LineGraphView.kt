@@ -7,6 +7,7 @@ import android.view.View
 import com.flaringapp.graphdrawer.graph.renderer.ComplexRenderer
 import com.flaringapp.graphdrawer.graph.renderer.GraphRenderer
 import com.flaringapp.graphdrawer.graph.renderer.RendererContainer
+import com.flaringapp.graphdrawer.graph.renderer.properties.MutableRendererProperties
 
 class LineGraphView @JvmOverloads constructor(
     context: Context,
@@ -16,8 +17,21 @@ class LineGraphView @JvmOverloads constructor(
 
     private val renderers = ComplexRenderer<GraphRenderer>()
 
+    private val properties = MutableRendererProperties()
+
     init {
         setWillNotDraw(false)
+
+        notifyRenderersPropertiesChanged()
+    }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        if (w == oldw && h == oldh) return
+
+        properties.width = width
+        properties.height = height
+
+        notifyRenderersPropertiesChanged()
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -41,4 +55,11 @@ class LineGraphView @JvmOverloads constructor(
         action()
         invalidate()
     }
+
+    private fun notifyRenderersPropertiesChanged() {
+        renderers.updateProperties(
+            properties.asImmutable()
+        )
+    }
+
 }
