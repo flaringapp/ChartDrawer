@@ -3,9 +3,11 @@ package com.flaringapp.graphdrawer.graph.renderer
 import android.graphics.Canvas
 import com.flaringapp.graphdrawer.graph.renderer.properties.RendererProperties
 
-open class ComplexRenderer<T: GraphRenderer>(
+open class ComplexRenderer<T : GraphRenderer>(
     initialRenderers: List<T> = emptyList()
-): PropertyHoldingRenderer(), RendererContainer<T> {
+) : PropertyHoldingRenderer(), RendererContainer<T> {
+
+    constructor(vararg initialRenderers: T) : this(initialRenderers.toList())
 
     protected val renderers: MutableList<T> = initialRenderers.toMutableList()
 
