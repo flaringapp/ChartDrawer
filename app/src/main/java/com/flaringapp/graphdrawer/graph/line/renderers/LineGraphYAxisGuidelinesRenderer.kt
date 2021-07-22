@@ -21,8 +21,11 @@ class LineGraphYAxisGuidelinesRenderer(
     override fun updateProperties(properties: RendererProperties) {
         super.updateProperties(properties)
 
+        var bottomGapOffset = properties.translateY % guidelineGap
+        if (bottomGapOffset < 0) bottomGapOffset += guidelineGap
+
         endX = properties.width - padding.right
-        bottomY = properties.height - (properties.translateX % guidelineGap) - padding.bottom
+        bottomY = properties.height - bottomGapOffset - padding.bottom
     }
 
     override fun render(canvas: Canvas) {

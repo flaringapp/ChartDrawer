@@ -21,7 +21,11 @@ class LineGraphXAxisGuidelinesRenderer(
     override fun updateProperties(properties: RendererProperties) {
         super.updateProperties(properties)
 
-        startX = (properties.translateX % guidelineGap) + padding.left
+        var leftGapOffset = properties.translateX % guidelineGap
+        if (leftGapOffset < 0) leftGapOffset += guidelineGap
+
+
+        startX = leftGapOffset + padding.left
         endX = properties.width - padding.right
         bottomY = properties.height - padding.bottom
     }
