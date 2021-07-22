@@ -32,7 +32,7 @@ class LineGraphRenderer : ComplexRenderer<GraphRenderer>() {
         Paint().apply {
             style = Paint.Style.STROKE
             strokeWidth = 4f
-            color = Color.RED
+            color = Color.LTGRAY
             alpha = 128
         },
         guidelineGap = 160f,
@@ -43,17 +43,34 @@ class LineGraphRenderer : ComplexRenderer<GraphRenderer>() {
         Paint().apply {
             style = Paint.Style.STROKE
             strokeWidth = 4f
-            color = Color.BLUE
+            color = Color.LTGRAY
             alpha = 128
         },
         guidelineGap = 100f,
         padding = paddings,
     )
 
+    val plotRenderer = LineGraphPlotRenderer(
+        Paint().apply {
+            style = Paint.Style.FILL
+            color = Color.BLUE
+            isAntiAlias = true
+        },
+        Paint().apply {
+            style = Paint.Style.STROKE
+            color = Color.BLUE
+            strokeWidth = 8f
+            isAntiAlias = true
+        },
+        10f,
+        padding = paddings
+    )
+
     init {
         renderers += axesRenderer
         renderers += xAxisGuidelinesRenderer
         renderers += yAxisGuidelinesRenderer
+        renderers += plotRenderer
     }
 
 }

@@ -9,6 +9,10 @@ class MutableRendererViewport(
     override var height: Float,
 ) : RendererViewport {
 
+    constructor(left: Float, top: Float, right: Float, bottom: Float): this(
+        left, top, right, bottom, right - left, bottom - top
+    )
+
     fun updateAndCalculateSize(updateAction: MutableRendererViewport.() -> Unit) {
         updateAction(this)
 
