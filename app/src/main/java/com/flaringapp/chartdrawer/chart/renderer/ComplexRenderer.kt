@@ -1,9 +1,9 @@
-package com.flaringapp.graphdrawer.graph.renderer
+package com.flaringapp.chartdrawer.chart.renderer
 
 import android.graphics.Canvas
-import com.flaringapp.graphdrawer.graph.renderer.properties.RendererProperties
+import com.flaringapp.chartdrawer.chart.renderer.properties.RendererProperties
 
-open class ComplexRenderer<T : GraphRenderer>(
+open class ComplexRenderer<T : ChartRenderer>(
     initialRenderers: List<T> = emptyList()
 ) : PropertyHoldingRenderer(), RendererContainer<T> {
 

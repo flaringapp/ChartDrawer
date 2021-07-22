@@ -1,25 +1,25 @@
-package com.flaringapp.graphdrawer.graph.line
+package com.flaringapp.chartdrawer.chart.line
 
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
-import com.flaringapp.graphdrawer.graph.line.renderers.LineGraphRenderer
-import com.flaringapp.graphdrawer.graph.renderer.ComplexRenderer
-import com.flaringapp.graphdrawer.graph.renderer.GraphRenderer
-import com.flaringapp.graphdrawer.graph.renderer.RendererContainer
-import com.flaringapp.graphdrawer.graph.renderer.properties.MutableRendererProperties
-import com.flaringapp.graphdrawer.graph.renderer.viewport.MutableRendererViewport
+import com.flaringapp.chartdrawer.chart.line.renderers.LineChartRenderer
+import com.flaringapp.chartdrawer.chart.renderer.ComplexRenderer
+import com.flaringapp.chartdrawer.chart.renderer.ChartRenderer
+import com.flaringapp.chartdrawer.chart.renderer.RendererContainer
+import com.flaringapp.chartdrawer.chart.renderer.properties.MutableRendererProperties
+import com.flaringapp.chartdrawer.chart.renderer.viewport.MutableRendererViewport
 
-class LineGraphView @JvmOverloads constructor(
+class LineChartView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr), RendererContainer<GraphRenderer> {
+) : View(context, attrs, defStyleAttr), RendererContainer<ChartRenderer> {
 
-    private val lineRenderer = LineGraphRenderer()
+    private val lineRenderer = LineChartRenderer()
 
-    private val renderers = ComplexRenderer<GraphRenderer>()
+    private val renderers = ComplexRenderer<ChartRenderer>()
 
     private val properties = MutableRendererProperties()
 
@@ -47,19 +47,19 @@ class LineGraphView @JvmOverloads constructor(
         renderers.render(canvas)
     }
 
-    override fun addRenderer(renderer: GraphRenderer) {
+    override fun addRenderer(renderer: ChartRenderer) {
         rendererSensitiveAction {
             renderers += renderer
         }
     }
 
-    override fun removeRenderer(renderer: GraphRenderer) {
+    override fun removeRenderer(renderer: ChartRenderer) {
         rendererSensitiveAction {
             renderers -= renderer
         }
     }
 
-    fun updateDataset(dataset: LineGraphPlotSet) {
+    fun updateDataset(dataset: LineChartDataset) {
         rendererSensitiveAction {
             lineRenderer.plotRenderer.setDataset(dataset)
             updateAffineToFitDataset(dataset)
@@ -67,7 +67,7 @@ class LineGraphView @JvmOverloads constructor(
     }
 
     // Fit dataset inside a view
-    private fun updateAffineToFitDataset(dataset: LineGraphPlotSet) {
+    private fun updateAffineToFitDataset(dataset: LineChartDataset) {
         if (properties.width == 0 || properties.height == 0) return
 
         val drawingRect = lineRenderer.plotRenderer.drawingRect
@@ -76,11 +76,11 @@ class LineGraphView @JvmOverloads constructor(
             dataset.maxX, dataset.minY
         )
 
-        var graphSize = fitViewport.top
-        if (fitViewport.bottom < 0) graphSize -= fitViewport.bottom
+        var chartHeight = fitViewport.top
+        if (fitViewport.bottom < 0) chartHeight -= fitViewport.bottom
 
         properties.scaleX = drawingRect.width() / fitViewport.width
-        properties.scaleY = drawingRect.width() / graphSize
+        properties.scaleY = drawingRect.height() / chartHeight
 
         // Scale down a bit
         properties.scaleX *= 0.8f

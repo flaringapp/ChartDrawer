@@ -1,4 +1,4 @@
-package com.flaringapp.graphdrawer.graph.renderer.properties
+package com.flaringapp.chartdrawer.chart.renderer.properties
 
 class MutableRendererProperties(
     override var width: Int = 0,

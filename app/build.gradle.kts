@@ -8,7 +8,7 @@ android {
     buildToolsVersion(ConfigData.buildToolsVersion)
 
     defaultConfig {
-        applicationId("com.flaringapp.graphdrawer")
+        applicationId("com.flaringapp.chartdrawer")
 
         minSdkVersion(ConfigData.minSdkVersion)
         targetSdkVersion(ConfigData.targetSdkVersion)

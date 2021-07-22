@@ -1,6 +1,6 @@
-package com.flaringapp.graphdrawer.graph.line
+package com.flaringapp.chartdrawer.chart.line
 
-class LineGraphPlot(
+class LineChartPoint(
     val xValue: Float,
     val yValue: Float
 ) {

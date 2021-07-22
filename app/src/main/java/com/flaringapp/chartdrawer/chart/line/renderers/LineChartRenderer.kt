@@ -1,13 +1,13 @@
-package com.flaringapp.graphdrawer.graph.line.renderers
+package com.flaringapp.chartdrawer.chart.line.renderers
 
 import android.graphics.Color
 import android.graphics.Paint
-import com.flaringapp.graphdrawer.graph.renderer.ComplexRenderer
-import com.flaringapp.graphdrawer.graph.renderer.GraphRenderer
-import com.flaringapp.graphdrawer.graph.renderer.common.RendererPadding
+import com.flaringapp.chartdrawer.chart.renderer.ComplexRenderer
+import com.flaringapp.chartdrawer.chart.renderer.ChartRenderer
+import com.flaringapp.chartdrawer.chart.renderer.common.RendererPadding
 
 // TODO stylize outside
-class LineGraphRenderer : ComplexRenderer<GraphRenderer>() {
+class LineChartRenderer : ComplexRenderer<ChartRenderer>() {
 
     companion object {
         private const val PADDING_LEFT = 100f
@@ -19,7 +19,7 @@ class LineGraphRenderer : ComplexRenderer<GraphRenderer>() {
             RendererPadding(PADDING_LEFT, PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM)
     }
 
-    val axesRenderer = LineGraphAxesRenderer(
+    val axesRenderer = LineChartAxesRenderer(
         Paint().apply {
             style = Paint.Style.STROKE
             strokeWidth = 10f
@@ -28,7 +28,7 @@ class LineGraphRenderer : ComplexRenderer<GraphRenderer>() {
         padding = paddings
     )
 
-    val xAxisGuidelinesRenderer = LineGraphXAxisGuidelinesRenderer(
+    val xAxisGuidelinesRenderer = LineChartXAxisGuidelinesRenderer(
         Paint().apply {
             style = Paint.Style.STROKE
             strokeWidth = 4f
@@ -39,7 +39,7 @@ class LineGraphRenderer : ComplexRenderer<GraphRenderer>() {
         padding = paddings,
     )
 
-    val yAxisGuidelinesRenderer = LineGraphYAxisGuidelinesRenderer(
+    val yAxisGuidelinesRenderer = LineChartYAxisGuidelinesRenderer(
         Paint().apply {
             style = Paint.Style.STROKE
             strokeWidth = 4f
@@ -50,7 +50,7 @@ class LineGraphRenderer : ComplexRenderer<GraphRenderer>() {
         padding = paddings,
     )
 
-    val plotRenderer = LineGraphPlotRenderer(
+    val plotRenderer = LineChartPlotRenderer(
         Paint().apply {
             style = Paint.Style.FILL
             color = Color.BLUE

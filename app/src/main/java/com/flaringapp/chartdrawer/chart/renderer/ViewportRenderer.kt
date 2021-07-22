@@ -1,8 +1,8 @@
-package com.flaringapp.graphdrawer.graph.renderer
+package com.flaringapp.chartdrawer.chart.renderer
 
-import com.flaringapp.graphdrawer.graph.renderer.properties.RendererProperties
-import com.flaringapp.graphdrawer.graph.renderer.viewport.MutableRendererViewport
-import com.flaringapp.graphdrawer.graph.renderer.viewport.RendererViewport
+import com.flaringapp.chartdrawer.chart.renderer.properties.RendererProperties
+import com.flaringapp.chartdrawer.chart.renderer.viewport.MutableRendererViewport
+import com.flaringapp.chartdrawer.chart.renderer.viewport.RendererViewport
 
 abstract class ViewportRenderer : PropertyHoldingRenderer() {
 

@@ -1,6 +1,6 @@
-package com.flaringapp.graphdrawer.graph.renderer
+package com.flaringapp.chartdrawer.chart.renderer
 
-interface RendererContainer<T : GraphRenderer> {
+interface RendererContainer<T : ChartRenderer> {
 
     fun addRenderer(renderer: T)
     fun removeRenderer(renderer: T)

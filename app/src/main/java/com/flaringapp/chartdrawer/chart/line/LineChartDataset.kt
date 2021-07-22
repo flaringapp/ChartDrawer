@@ -1,7 +1,7 @@
-package com.flaringapp.graphdrawer.graph.line
+package com.flaringapp.chartdrawer.chart.line
 
-class LineGraphPlotSet(
-    val plots: List<LineGraphPlot>,
+class LineChartDataset(
+    val points: List<LineChartPoint>,
     val minX: Float,
     val maxX: Float,
     val minY: Float,
@@ -9,21 +9,21 @@ class LineGraphPlotSet(
 ) {
 
     companion object {
-        val EMPTY: LineGraphPlotSet by lazy {
-            LineGraphPlotSet(emptyList(), 0f, 0f, 0f, 0f)
+        val EMPTY: LineChartDataset by lazy {
+            LineChartDataset(emptyList(), 0f, 0f, 0f, 0f)
         }
 
-        fun create(plots: List<LineGraphPlot>): LineGraphPlotSet {
-            if (plots.isEmpty()) return EMPTY
-            val firstPoint = plots.first()
+        fun create(points: List<LineChartPoint>): LineChartDataset {
+            if (points.isEmpty()) return EMPTY
+            val firstPoint = points.first()
 
             var minX = firstPoint.xValue
             var maxX = minX
             var minY = firstPoint.yValue
             var maxY = minY
 
-            for (i in 1 until plots.size) {
-                val point = plots[i]
+            for (i in 1 until points.size) {
+                val point = points[i]
                 when {
                     point.xValue > maxX -> maxX = point.xValue
                     point.xValue < minX -> minX = point.xValue
@@ -35,8 +35,8 @@ class LineGraphPlotSet(
                 }
             }
 
-            return LineGraphPlotSet(
-                plots,
+            return LineChartDataset(
+                points,
                 minX, maxX,
                 minY, maxY
             )

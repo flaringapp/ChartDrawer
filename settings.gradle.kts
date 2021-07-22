@@ -1,2 +1,2 @@
 include (":app")
-rootProject.name = "Graph Drawer"
+rootProject.name = "Chart Drawer"

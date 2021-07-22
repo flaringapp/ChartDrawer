@@ -1,4 +1,4 @@
-package com.flaringapp.graphdrawer.graph.renderer.viewport
+package com.flaringapp.chartdrawer.chart.renderer.viewport
 
 class MutableRendererViewport(
     override var left: Float,

@@ -1,24 +1,24 @@
-package com.flaringapp.graphdrawer.graph.line.renderers
+package com.flaringapp.chartdrawer.chart.line.renderers
 
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.RectF
-import com.flaringapp.graphdrawer.graph.line.LineGraphPlot
-import com.flaringapp.graphdrawer.graph.line.LineGraphPlotSet
-import com.flaringapp.graphdrawer.graph.renderer.ViewportRenderer
-import com.flaringapp.graphdrawer.graph.renderer.common.RendererPadding
-import com.flaringapp.graphdrawer.graph.renderer.properties.RendererProperties
-import com.flaringapp.graphdrawer.graph.renderer.viewport.MutableRendererViewport
+import com.flaringapp.chartdrawer.chart.line.LineChartPoint
+import com.flaringapp.chartdrawer.chart.line.LineChartDataset
+import com.flaringapp.chartdrawer.chart.renderer.ViewportRenderer
+import com.flaringapp.chartdrawer.chart.renderer.common.RendererPadding
+import com.flaringapp.chartdrawer.chart.renderer.properties.RendererProperties
+import com.flaringapp.chartdrawer.chart.renderer.viewport.MutableRendererViewport
 
-class LineGraphPlotRenderer(
+class LineChartPlotRenderer(
     private val pointPaint: Paint,
     private val linePaint: Paint,
     private val pointRadius: Float,
     private val padding: RendererPadding,
 ) : ViewportRenderer() {
 
-    var dataset: LineGraphPlotSet = LineGraphPlotSet.EMPTY
+    var dataset: LineChartDataset = LineChartDataset.EMPTY
         private set
 
     var drawingRect: RectF = RectF()
@@ -30,7 +30,7 @@ class LineGraphPlotRenderer(
         drawingRect = padding.asRect(properties.width, properties.height)
     }
 
-    // TODO optimize rendering with validation if plot is inside viewport
+    // TODO optimize rendering with validation if point is inside viewport
     override fun render(canvas: Canvas) {
         canvas.save()
 
@@ -39,13 +39,13 @@ class LineGraphPlotRenderer(
         canvas.translate(properties.translateX, properties.translateY)
         canvas.translate(padding.left, padding.top)
 
-        // Invert y axis because canvas is inverted relative to plot
+        // Invert y axis because canvas is inverted relative to chart
         canvas.scale(
             1f, -1f,
             0f, viewportY((dataset.maxY - dataset.minY) / 2f)
         )
 
-        renderPlots(canvas)
+        renderPointsAndLines(canvas)
 
         canvas.restore()
     }
@@ -61,17 +61,17 @@ class LineGraphPlotRenderer(
         }
     }
 
-    fun setDataset(dataset: LineGraphPlotSet) {
+    fun setDataset(dataset: LineChartDataset) {
         this.dataset = dataset
     }
 
-    private fun renderPlots(canvas: Canvas) {
-        if (dataset.plots.isEmpty()) return
+    private fun renderPointsAndLines(canvas: Canvas) {
+        if (dataset.points.isEmpty()) return
 
-        val firstPoint = dataset.plots.first()
-        renderPlotPoint(canvas, firstPoint)
+        val firstPoint = dataset.points.first()
+        renderPoint(canvas, firstPoint)
 
-        if (dataset.plots.size == 1) return
+        if (dataset.points.size == 1) return
 
         val path = Path()
         path.moveTo(
@@ -79,28 +79,28 @@ class LineGraphPlotRenderer(
             viewportY(firstPoint.yValue),
         )
 
-        for (i in 1 until dataset.plots.size) {
-            val point = dataset.plots[i]
-            renderPlotPoint(canvas, point)
+        for (i in 1 until dataset.points.size) {
+            val point = dataset.points[i]
+            renderPoint(canvas, point)
             path.lineTo(
                 viewportX(point.xValue),
                 viewportY(point.yValue)
             )
         }
 
-        renderPlotLine(canvas, path)
+        renderLine(canvas, path)
     }
 
-    private fun renderPlotPoint(canvas: Canvas, plot: LineGraphPlot) {
+    private fun renderPoint(canvas: Canvas, point: LineChartPoint) {
         canvas.drawCircle(
-            viewportX(plot.xValue),
-            viewportY(plot.yValue),
+            viewportX(point.xValue),
+            viewportY(point.yValue),
             pointRadius,
             pointPaint
         )
     }
 
-    private fun renderPlotLine(
+    private fun renderLine(
         canvas: Canvas,
         path: Path
     ) {

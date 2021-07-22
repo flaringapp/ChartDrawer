@@ -1,4 +1,4 @@
-package com.flaringapp.graphdrawer.graph.renderer.common
+package com.flaringapp.chartdrawer.chart.renderer.common
 
 import android.graphics.RectF
 

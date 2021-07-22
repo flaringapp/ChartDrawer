@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Graph Drawer</string>
+    <string name="app_name">Chart Drawer</string>
     <string name="button_append_point">Append new point</string>
     <string name="button_refresh_dataset">Refresh dataset</string>
 </resources>

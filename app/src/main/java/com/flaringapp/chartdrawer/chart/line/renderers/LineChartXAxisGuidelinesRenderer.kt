@@ -1,12 +1,12 @@
-package com.flaringapp.graphdrawer.graph.line.renderers
+package com.flaringapp.chartdrawer.chart.line.renderers
 
 import android.graphics.Canvas
 import android.graphics.Paint
-import com.flaringapp.graphdrawer.graph.renderer.ViewportRenderer
-import com.flaringapp.graphdrawer.graph.renderer.common.RendererPadding
-import com.flaringapp.graphdrawer.graph.renderer.properties.RendererProperties
+import com.flaringapp.chartdrawer.chart.renderer.ViewportRenderer
+import com.flaringapp.chartdrawer.chart.renderer.common.RendererPadding
+import com.flaringapp.chartdrawer.chart.renderer.properties.RendererProperties
 
-class LineGraphXAxisGuidelinesRenderer(
+class LineChartXAxisGuidelinesRenderer(
     private val guidelinePaint: Paint,
     private val guidelineGap: Float,
     private val padding: RendererPadding,
