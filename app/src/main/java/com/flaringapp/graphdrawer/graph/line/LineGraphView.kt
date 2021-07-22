@@ -40,8 +40,6 @@ class LineGraphView @JvmOverloads constructor(
         notifyRenderersPropertiesChanged()
 
         updateAffineToFitDataset(lineRenderer.plotRenderer.dataset)
-
-        notifyRenderersPropertiesChanged()
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -72,7 +70,7 @@ class LineGraphView @JvmOverloads constructor(
     private fun updateAffineToFitDataset(dataset: LineGraphPlotSet) {
         if (properties.width == 0 || properties.height == 0) return
 
-        val currentViewport = lineRenderer.plotRenderer.viewport
+        val drawingRect = lineRenderer.plotRenderer.drawingRect
         val fitViewport = MutableRendererViewport(
             dataset.minX, dataset.maxY,
             dataset.maxX, dataset.minY
@@ -81,8 +79,8 @@ class LineGraphView @JvmOverloads constructor(
         var graphSize = fitViewport.top
         if (fitViewport.bottom < 0) graphSize -= fitViewport.bottom
 
-        properties.scaleX *= currentViewport.width / fitViewport.width
-        properties.scaleY *= lineRenderer.plotRenderer.drawingRect.height() / graphSize
+        properties.scaleX = drawingRect.width() / fitViewport.width
+        properties.scaleY = drawingRect.width() / graphSize
 
         // Scale down a bit
         properties.scaleX *= 0.8f
@@ -92,6 +90,8 @@ class LineGraphView @JvmOverloads constructor(
         properties.translateX = -fitViewport.left * properties.scaleX
         properties.translateY = -fitViewport.top * properties.scaleY +
                 lineRenderer.plotRenderer.drawingRect.height()
+
+        notifyRenderersPropertiesChanged()
     }
 
     private fun rendererSensitiveAction(action: () -> Unit) {
